@@ -33,6 +33,8 @@ const Register = () => {
     const [user, setUser] = useState({
         username: '',
         password: '',
+        name: '',
+        phone: '',
     });
 
     const inputChangeHandler = e => {
@@ -92,25 +94,22 @@ const Register = () => {
 
                     <FormElement
                         type="text"
-                        autoComlete="NEW-name"
+                        autoComlete="new-name"
                         label="Name"
-                        name="Name"
+                        name="name"
                         value={user.name}
                         onChange={inputChangeHandler}
                         error={getFieldError('name')}
-                        required
                     />
 
                     <FormElement
                         type="tel"
-                        autoComlete="tel"
+                        autoComlete="new-tel"
                         label="Phone"
-                        name="Phone"
+                        name="phone"
                         value={user.phone}
                         onChange={inputChangeHandler}
                         error={getFieldError('phone')}
-                        required
-                        // pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     />
                     <Grid item xs={12}>
                         <Button
