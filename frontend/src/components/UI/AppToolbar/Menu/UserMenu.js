@@ -10,6 +10,7 @@ const UserMenu = ({user}) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const categoriesMenu = useSelector(state => state.categories.categoriesMenu);
 
+    let categoryName = null;
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -24,11 +25,15 @@ const UserMenu = ({user}) => {
         if (data.title !== 'All items') {
             id = data._id;
         }
+        categoryName = data.title;
         dispatch(fetchItems(id));
     };
 
     return (
         <Grid container>
+            <Grid item>
+                {categoryName}
+            </Grid>
             <Grid item>
                 <Button color="inherit" component={Link} to="/items/new">Add</Button>
             </Grid>

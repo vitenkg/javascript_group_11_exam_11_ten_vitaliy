@@ -16,13 +16,8 @@ const MainPage = () => {
     }, [dispatch]);
 
     return (
-        <Grid container direction="column">
+        <Grid container direction="column" >
             <Grid container item direction="column" spacing={2}>
-                <Grid item container justifyContent="space-between" alignItems="center">
-                    <Grid item>
-                    </Grid>
-
-                </Grid>
                 <Grid item>
                     <Grid item container direction="row" spacing={1}>
                         {fetchLoading ? (
