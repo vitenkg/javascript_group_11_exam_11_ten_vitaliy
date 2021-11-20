@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
-import {Link} from "react-router-dom";
-import {Button, CircularProgress, Grid, Typography} from "@material-ui/core";
+import {CircularProgress, Grid} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchItems} from "../../store/actions/itemsActions";
 import ProductItem from "../../components/ProductItem/ProductItem";
+import {fetchCategories} from "../../store/actions/categoriesActions";
 
 const MainPage = () => {
     const dispatch = useDispatch();
@@ -12,6 +12,7 @@ const MainPage = () => {
 
     useEffect(() => {
         dispatch(fetchItems());
+        dispatch(fetchCategories());
     }, [dispatch]);
 
     return (
@@ -19,11 +20,8 @@ const MainPage = () => {
             <Grid container item direction="column" spacing={2}>
                 <Grid item container justifyContent="space-between" alignItems="center">
                     <Grid item>
-                        <Typography variant="h4">All items</Typography>
                     </Grid>
-                    <Grid item>
-                        <Button coloe="primary" component={Link} to="/items/new">Add</Button>
-                    </Grid>
+
                 </Grid>
                 <Grid item>
                     <Grid item container direction="row" spacing={1}>

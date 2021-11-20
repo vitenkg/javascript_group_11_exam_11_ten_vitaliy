@@ -75,6 +75,11 @@ const ProductForm = ({onSubmit, categories}) => {
                     fullWidth
                     variant="outlined"
                     type="number"
+                    InputProps={{
+                        inputProps: {
+                            min: 0
+                        }
+                    }}
                     label="Price"
                     name="price"
                     value={state.price}

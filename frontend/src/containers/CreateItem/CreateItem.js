@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Typography} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
-import {createItem, fetchItems} from "../../store/actions/itemsActions";
+import {createItem} from "../../store/actions/itemsActions";
 import ItemForm from "../ItemForm/ItemForm";
 import {fetchCategories} from "../../store/actions/categoriesActions";
 

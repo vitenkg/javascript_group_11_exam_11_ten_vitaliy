@@ -86,6 +86,7 @@ export const createItem = itemData => {
             dispatch(createItemSuccess());
             toast.success('Item created');
         } catch (e) {
+            toast.warning('Inputs uncorrect');
             dispatch(createItemFailure());
             throw e;
         }
