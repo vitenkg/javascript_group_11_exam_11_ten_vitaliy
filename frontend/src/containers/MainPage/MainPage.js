@@ -2,34 +2,27 @@ import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
 import {Button, CircularProgress, Grid, Typography} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchProducts} from "../../store/actions/productsActions";
+import {fetchItems} from "../../store/actions/itemsActions";
 import ProductItem from "../../components/ProductItem/ProductItem";
 
 const MainPage = () => {
     const dispatch = useDispatch();
-    const products = useSelector(state => state.products.products);
-    const fetchLoading = useSelector(state => state.products.fetchLoading);
+    const itemsData = useSelector(state => state.items.items);
+    const fetchLoading = useSelector(state => state.items.fetchLoading);
 
     useEffect(() => {
-        dispatch(fetchProducts());
+        dispatch(fetchItems());
     }, [dispatch]);
 
     return (
         <Grid container direction="column">
-            {/*<Grid container item spacing={2}>*/}
-            {/*    <Grid item>*/}
-            {/*        <ul>*/}
-            {/*            <li><p>All items</p></li>*/}
-            {/*        </ul>*/}
-            {/*    </Grid>*/}
-            {/*</Grid>*/}
             <Grid container item direction="column" spacing={2}>
                 <Grid item container justifyContent="space-between" alignItems="center">
                     <Grid item>
                         <Typography variant="h4">All items</Typography>
                     </Grid>
                     <Grid item>
-                        <Button coloe="primary" component={Link} to="/products/new">Add</Button>
+                        <Button coloe="primary" component={Link} to="/items/new">Add</Button>
                     </Grid>
                 </Grid>
                 <Grid item>
@@ -40,7 +33,7 @@ const MainPage = () => {
                                     <CircularProgress/>
                                 </Grid>
                             </Grid>
-                        ) : products.map(product => (
+                        ) : itemsData.map(product => (
                             <ProductItem
                                 key={product._id}
                                 id={product._id}
