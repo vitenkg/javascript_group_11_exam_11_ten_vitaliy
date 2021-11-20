@@ -2,6 +2,7 @@ import axios from "axios";
 import {toast} from "react-toastify";
 import WarningIcon from '@material-ui/icons/Warning';
 import axiosApi from "../../axiosApi";
+import {historyPush} from "./historyActions";
 
 export const FETCH_ITEMS_REQUEST = 'FETCH_ITEMS_REQUEST';
 export const FETCH_ITEMS_SUCCESS = 'FETCH_ITEMS_SUCCESS';
@@ -104,8 +105,14 @@ export const eraseItem = id => {
             })
             dispatch(eraseItemSuccess());
             toast.success('Item Erased');
+            dispatch(historyPush('/'));
         } catch (e) {
-            dispatch(eraseItemFailure())
+            dispatch(eraseItemFailure());
+            if (e.response.status === 403) {
+                toast.warning('Access denied');
+            } else if (e.response.status === 404) {
+                toast.warning('Item not Found');
+            }
         }
     };
 };
