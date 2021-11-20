@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {fetchItem} from "../../store/actions/itemsActions";
-import {Box, makeStyles, Paper, Typography} from "@material-ui/core";
+import {eraseItem, fetchItem} from "../../store/actions/itemsActions";
+import {Box, Button, makeStyles, Paper, Typography} from "@material-ui/core";
 import {apiURL} from "../../config";
 
 const useStyles = makeStyles({
@@ -14,11 +14,22 @@ const useStyles = makeStyles({
 const Item = ({match}) => {
     const dispatch = useDispatch();
     const item = useSelector(state => state.items.item);
+    const user = useSelector(state => state.users.user)
     const classes=useStyles();
 
     useEffect(() => {
         dispatch(fetchItem(match.params.id));
     }, [dispatch, match.params.id]);
+
+    let deleteButton = null;
+
+    if (user && item) {
+        if (user.username === item.user.username){
+            deleteButton = (
+                <Button variant="outlined" color="secondary" onClick={() => dispatch(eraseItem(item._id))}>Delete</Button>
+            )
+        }
+    }
 
     return item && (
         <Paper component={Box} p={2}>
@@ -27,6 +38,7 @@ const Item = ({match}) => {
             <Typography variant="h4">{item.title}</Typography>
             <Typography variant="body1">{item.description}</Typography>
             <Typography variant="subtitle1">{item.price} KGS</Typography>
+            {deleteButton}
         </Paper>
     );
 };
